@@ -2,7 +2,7 @@
 
 :root {
   --background: #ffffff;
-  --foreground: #171717;
+  --foreground: #000;
 }
 
 @theme inline {
@@ -10,17 +10,58 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --font-poppins: var(--font-poppins);
+  --font-lora: var(--font-lora);
+  --color-main-purple: #6A00F4;
+  --color-pink-900: #FF0A54;
+  --color-pink-700: #FF477E;
+  --color-pink-500: #FF85A1;
+  --color-pink-300: #FBB1BD;
+  --color-pink-100: #FAE0E4;
+
 }
 
-@media (prefers-color-scheme: dark) {
+/* @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
     --foreground: #ededed;
   }
-}
+} */
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-poppins);
+  box-sizing: border-box;
+}
+
+@layer components {
+  .btn {
+    border-radius: 9px;
+    padding: 7px 10px;
+    text-align: center;
+    min-width: 120px;
+    font-size: 0.9rem;
+  }
+
+
+  .text-coloured {
+    background: transparent;
+    width: fit-content;
+    color: var(--color-main-purple);
+  }
+
+}
+
+hr {
+  border: 0;
+}
+
+@supports (-webkit-background-clip: text) {
+  .text-coloured {
+    background: linear-gradient(to right, var(--color-main-purple), var(--color-pink-900));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+  }
 }
