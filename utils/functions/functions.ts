@@ -19,19 +19,26 @@ export const signupWithEmail = async ({
   password: string;
 }) => {
   try {
-    const user = await createUserWithEmailAndPassword(auth, email, password);
-    if (user && auth.currentUser) {
+    const result = await createUserWithEmailAndPassword(auth, email, password);
+    if (result && auth.currentUser) {
       await updateProfile(auth.currentUser, {
         displayName: name,
       });
     }
+    const user = result.user;
+    window.localStorage.setItem(
+      "SCOOPIES_CURRENT_USER",
+      JSON.stringify({ name: user.displayName, email: user.email })
+    );
     console.log("====================================");
     console.log(user);
     console.log("====================================");
   } catch (error) {
     console.log("====================================");
     console.log(error);
+
     console.log("====================================");
+    throw Error("Registration failed");
   }
 };
 export const signinWithEmail = async ({
@@ -42,13 +49,21 @@ export const signinWithEmail = async ({
   password: string;
 }) => {
   try {
-    const user = await signInWithEmailAndPassword(auth, email, password);
+    const result = await signInWithEmailAndPassword(auth, email, password);
+    const user = result.user;
+    window.localStorage.setItem(
+      "SCOOPIES_CURRENT_USER",
+      JSON.stringify({ name: user.displayName, email: user.email })
+    );
+
     console.log("====================================");
     console.log(user);
     console.log("====================================");
   } catch (error) {
     console.log("====================================");
     console.log(error);
+    throw Error("Sign in failed");
+
     console.log("====================================");
   }
 };
@@ -62,6 +77,10 @@ export const signinWithGoogle = async () => {
     const token = credential?.accessToken;
     // The signed-in user info.
     const user = result.user;
+    window.localStorage.setItem(
+      "SCOOPIES_CURRENT_USER",
+      JSON.stringify({ name: user.displayName, email: user.email })
+    );
   } catch (error) {
     console.log("====================================");
     console.log(error);

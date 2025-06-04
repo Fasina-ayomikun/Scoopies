@@ -35,6 +35,15 @@ body {
   box-sizing: border-box;
 }
 
+.form-background {
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("/assets/login.jpg") no-repeat bottom;
+  background-size: cover;
+
+  @media (max-width:768px) {
+    background: white;
+  }
+}
+
 @layer components {
   .btn {
     border-radius: 9px;
@@ -42,6 +51,13 @@ body {
     text-align: center;
     min-width: 120px;
     font-size: 0.9rem;
+    cursor: pointer;
+
+    &:hover {
+      @media (hover:hover) {
+        opacity: 0.9;
+      }
+    }
   }
 
 

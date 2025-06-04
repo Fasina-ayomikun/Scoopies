@@ -1,22 +1,16 @@
 "use client";
-import { createContext, ReactNode, useContext } from "react";
+import { createContext, ReactNode, useContext, useState } from "react";
+import { contextInterface } from "../functions/types";
 
-interface initialStateInterface {
-  isLoading: boolean;
-  isError: boolean;
-  user: any;
-}
-const initialState: initialStateInterface = {
-  isLoading: false,
-  user: {},
-  isError: false,
-};
-
-const AuthContext = createContext<initialStateInterface | null>(null);
+const AuthContext = createContext<contextInterface>(null!);
 
 function AuthProvider({ children }: { children: ReactNode }) {
+  const [user, setUser] = useState({ name: "", email: "" });
+
   return (
-    <AuthContext.Provider value={initialState}>{children}</AuthContext.Provider>
+    <AuthContext.Provider value={{ user, setUser }}>
+      {children}
+    </AuthContext.Provider>
   );
 }
 

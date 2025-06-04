@@ -1,4 +1,5 @@
 "use client";
+import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { FaInfo, FaInfoCircle } from "react-icons/fa";
 import { FaCircleXmark } from "react-icons/fa6";
@@ -6,15 +7,18 @@ import { FaCircleXmark } from "react-icons/fa6";
 interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   showForgot?: boolean;
   label?: string;
+  error?: string;
 }
 
 const Input: React.FC<InputProps> = ({
   type,
   showForgot = false,
   label,
+  error,
   ...rest
 }) => {
   const [showPassword, setShowPassword] = useState(false);
+  const navigate = useRouter();
   return (
     <div className='flex flex-col gap-2 items-start w-full my-4 mb-6'>
       {label && (
@@ -45,14 +49,18 @@ const Input: React.FC<InputProps> = ({
         )}
       </div>
       {showForgot && (
-        <p className='text-xs text-gray-500 capitalize text-end w-full'>
+        <p
+          onClick={() => navigate.push("/forgot-password")}
+          className='cursor-pointer text-xs text-gray-500 capitalize text-end w-full'
+        >
           Forgot password?
         </p>
       )}
-
-      <p className='text-xs ml-3 text-red-500 flex items-center gap-1'>
-        <FaInfoCircle /> Errorssss
-      </p>
+      {error && (
+        <p className='text-xs ml-3 text-red-500 flex items-center gap-1'>
+          <FaInfoCircle /> {error}
+        </p>
+      )}
     </div>
   );
 };

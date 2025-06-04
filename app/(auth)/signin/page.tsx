@@ -1,17 +1,25 @@
 "use client";
 import Navbar from "@/components/Navbar";
 import Input from "@/mini-components/Input";
-import { RegisterUserInterface, UserInterface } from "@/utils/functions/types";
+import {
+  RegisterUserInterface,
+  SignInUserInterface,
+  UserInterface,
+} from "@/utils/functions/types";
 import Link from "next/link";
 import React, { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { registerSchema } from "@/utils/functions/schema";
-import { signinWithGoogle, signupWithEmail } from "@/utils/functions/functions";
+import { loginSchema, registerSchema } from "@/utils/functions/schema";
+import {
+  signinWithEmail,
+  signinWithGoogle,
+  signupWithEmail,
+} from "@/utils/functions/functions";
 import { useContextProvider } from "@/utils/context/authContext";
 import { useRouter } from "next/navigation";
 
-const SignUp = () => {
+const SignIn = () => {
   const [termsCheck, setTermsCheck] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const { setUser } = useContextProvider();
@@ -20,9 +28,9 @@ const SignUp = () => {
     handleSubmit,
     watch,
     formState: { errors },
-  } = useForm<RegisterUserInterface>({ resolver: yupResolver(registerSchema) });
+  } = useForm<SignInUserInterface>({ resolver: yupResolver(loginSchema) });
   const navigate = useRouter();
-  const formSubmitHandler: SubmitHandler<RegisterUserInterface> = async (
+  const formSubmitHandler: SubmitHandler<SignInUserInterface> = async (
     data
   ) => {
     setIsLoading(true);
@@ -30,21 +38,18 @@ const SignUp = () => {
       console.log("====================================");
       console.log(data, errors);
       console.log("====================================");
-      if (termsCheck && data.password === data.confirmPassword) {
-        await signupWithEmail({
-          name: data.name,
-          email: data.email,
-          password: data.password,
-        });
+      await signinWithEmail({
+        email: data.email,
+        password: data.password,
+      });
+      let user: string | UserInterface | null = window.localStorage.getItem(
+        "SCOOPIES_CURRENT_USER"
+      );
+      user = user ? JSON.parse(user) : null;
+      if (user) {
+        setUser(user as UserInterface);
 
-        let user: string | UserInterface | null = window.localStorage.getItem(
-          "SCOOPIES_CURRENT_USER"
-        );
-        user = user ? JSON.parse(user) : null;
-        if (user) {
-          setUser(user as UserInterface);
-          navigate.push("/");
-        }
+        navigate.push("/");
       }
     } catch (error) {
       console.log("====================================");
@@ -74,14 +79,6 @@ const SignUp = () => {
             })}
           >
             <Input
-              type='text'
-              label='Name'
-              error={errors?.name?.message}
-              required
-              placeholder='Enter Your Name'
-              {...register("name")}
-            />
-            <Input
               error={errors?.email?.message}
               type='email'
               label='Email'
@@ -96,50 +93,10 @@ const SignUp = () => {
               required
               placeholder='Enter A Password'
               {...register("password")}
-            />
-            <Input
-              type='password'
-              error={errors?.confirmPassword?.message}
-              label='Confirm Password'
-              required
-              placeholder='Confirm Your Password'
-              {...register("confirmPassword")}
+              showForgot={true}
             />
 
-            <div className='text-gray-700 my-3 px-2 mb-8 flex items-center gap-2 text-sm'>
-              <input
-                type='checkbox'
-                name='terms'
-                id='terms'
-                required
-                checked={termsCheck}
-                onChange={(e) => {
-                  setTermsCheck((prev) => !prev);
-                }}
-              />
-              <label htmlFor='terms'>
-                I agree to the{" "}
-                <a href='/terms' className='text-main-purple underline'>
-                  Terms and Conditions
-                </a>{" "}
-                and{" "}
-                <a href='/privacy' className='text-main-purple underline'>
-                  Privacy Policy
-                </a>
-              </label>
-            </div>
             <button
-              onClick={() => {
-                signinWithGoogle();
-                let user: string | UserInterface | null =
-                  window.localStorage.getItem("SCOOPIES_CURRENT_USER");
-                user = user ? JSON.parse(user) : null;
-                if (user) {
-                  setUser(user as UserInterface);
-
-                  navigate.push("/");
-                }
-              }}
               type='submit'
               disabled={isLoading}
               className='btn bg-pink-900 text-white w-full capitalize'
@@ -153,18 +110,29 @@ const SignUp = () => {
               <hr className='bg-gray-300 h-[1px] rounded-2xl w-full' />
             </div>
             <button
+              onClick={() => {
+                signinWithGoogle();
+                let user: string | UserInterface | null =
+                  window.localStorage.getItem("SCOOPIES_CURRENT_USER");
+                user = user ? JSON.parse(user) : null;
+                if (user) {
+                  setUser(user as UserInterface);
+
+                  navigate.push("/");
+                }
+              }}
               type='button'
               className='btn text-red-600 border--pink-900 bg-transparent border w-full '
             >
-              Sign up with Google
+              Sign in with Google
             </button>
             <p className='text-sm text-center my-4 mt-7 text-gray-700'>
-              Already have an account??{" "}
+              Don't have an account??{" "}
               <Link
-                href={"/signin"}
+                href={"/signup"}
                 className='text-main-purple underline underline-offset-1'
               >
-                Sign in
+                Sign up
               </Link>
             </p>
           </form>
@@ -174,4 +142,4 @@ const SignUp = () => {
   );
 };
 
-export default SignUp;
+export default SignIn;
