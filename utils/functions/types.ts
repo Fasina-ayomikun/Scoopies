@@ -18,3 +18,7 @@ export interface contextInterface {
   user: UserInterface;
   setUser: React.Dispatch<React.SetStateAction<UserInterface>>;
 }
+export enum Direction {
+  left = "left",
+  right = "right",
+}

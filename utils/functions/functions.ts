@@ -2,6 +2,7 @@
 import {
   createUserWithEmailAndPassword,
   GoogleAuthProvider,
+  sendPasswordResetEmail,
   signInWithEmailAndPassword,
   signInWithPopup,
   updateCurrentUser,
@@ -81,6 +82,18 @@ export const signinWithGoogle = async () => {
       "SCOOPIES_CURRENT_USER",
       JSON.stringify({ name: user.displayName, email: user.email })
     );
+  } catch (error) {
+    console.log("====================================");
+    console.log(error);
+    console.log("====================================");
+  }
+};
+export const passwordResetEmail = async (email: string) => {
+  try {
+    const result = await sendPasswordResetEmail(auth, email);
+    console.log("====================================");
+    console.log(result);
+    console.log("====================================");
   } catch (error) {
     console.log("====================================");
     console.log(error);

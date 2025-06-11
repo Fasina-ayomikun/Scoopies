@@ -44,6 +44,14 @@ body {
   }
 }
 
+.hero {
+  background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url("/assets/home.jpg") no-repeat center;
+  background-size: cover;
+
+}
+
+
+
 @layer components {
   .btn {
     border-radius: 9px;
@@ -55,7 +63,7 @@ body {
 
     &:hover {
       @media (hover:hover) {
-        opacity: 0.9;
+        opacity: 0.8;
       }
     }
   }
@@ -75,7 +83,7 @@ hr {
 
 @supports (-webkit-background-clip: text) {
   .text-coloured {
-    background: linear-gradient(to right, var(--color-main-purple), var(--color-pink-900));
+    background: linear-gradient(to right, var(--color-pink-900), var(--color-main-purple));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     color: transparent;

@@ -6,7 +6,7 @@ const Navbar = ({
   showToggle = true,
   white = false,
 }: {
-  showToggle: boolean;
+  showToggle?: boolean;
   white?: boolean;
 }) => {
   return (
@@ -19,7 +19,7 @@ const Navbar = ({
           alt='Scoopies'
           className={`w-20 md:w-24 `}
         />
-        {showToggle && <FaAlignJustify className='text-xl md:hidden' />}
+        {showToggle && <FaAlignJustify className='text-2xl md:hidden' />}
       </nav>
     </header>
   );

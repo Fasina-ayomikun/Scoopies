@@ -7,7 +7,7 @@ import {
   UserInterface,
 } from "@/utils/functions/types";
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { loginSchema, registerSchema } from "@/utils/functions/schema";
@@ -20,7 +20,7 @@ import { useContextProvider } from "@/utils/context/authContext";
 import { useRouter } from "next/navigation";
 
 const SignIn = () => {
-  const [termsCheck, setTermsCheck] = useState(false);
+  const [screenWidth, setScreenWidth] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
   const { setUser } = useContextProvider();
   const {
@@ -59,9 +59,14 @@ const SignIn = () => {
       setIsLoading(false);
     }
   };
+  useEffect(() => {
+    if (window) {
+      setScreenWidth(window.screen.width);
+    }
+  }, []);
   return (
     <section className='form-background pb-15 min-h-screen'>
-      <Navbar showToggle={false} white={window.screen.width >= 768} />
+      <Navbar showToggle={false} white={screenWidth >= 768} />
       <section>
         <section className=' bg-white rounded-md md:shadow-xl  max-w-2xl mx-auto px-10 py-8 w-md my-4'>
           <h2 className='text-main-purple text-3xl text-center font-semibold font-lora'>

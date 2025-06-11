@@ -1,0 +1,39 @@
+"use client";
+import React from "react";
+import Navbar from "./Navbar";
+import { FaChevronRight } from "react-icons/fa";
+import { useRouter } from "next/navigation";
+
+const Hero = ({
+  text,
+  navlink = "/menu",
+  desc,
+}: {
+  text: string[];
+  navlink?: string;
+  desc: string;
+}) => {
+  const navigate = useRouter();
+  return (
+    <section className='hero h-screen text-white'>
+      <Navbar white={true} />
+
+      <div className='mt-[25vh]'>
+        <h1 className='text-center text-3xl font-lora font-semibold mb-2'>
+          {text[0]} <br /> {text[1]}
+        </h1>
+        <p className='text-center text-md mb-8'>{desc}</p>
+        <button
+          onClick={() => {
+            navigate.push(navlink);
+          }}
+          className='btn flex items-center gap-2 bg-main-purple text-white px-5 justify-center mx-auto w-1/5'
+        >
+          Explore <FaChevronRight />
+        </button>
+      </div>
+    </section>
+  );
+};
+
+export default Hero;

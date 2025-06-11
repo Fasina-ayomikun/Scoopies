@@ -1,8 +1,11 @@
+"use client";
 import Navbar from "@/components/Navbar";
 import Input from "@/mini-components/Input";
-import React from "react";
+import { passwordResetEmail } from "@/utils/functions/functions";
+import React, { useState } from "react";
 
 const ForgotPassword = () => {
+  const [email, setEmail] = useState("");
   return (
     <section className='form-background pb-15 min-h-screen'>
       <Navbar showToggle={false} />
@@ -16,16 +19,16 @@ const ForgotPassword = () => {
           </p>
           <form
             className='mt-10'
-            // onSubmit={handleSubmit(formSubmitHandler, (errors) => {
-            //   console.log("====================================");
-            //   console.log(errors);
-            //   console.log("====================================");
-            // })}
+            onSubmit={(e) => {
+              e.preventDefault();
+              passwordResetEmail(email);
+            }}
           >
             <Input
               type='email'
               label='Email'
               required
+              onChange={(e) => setEmail(e.target.value)}
               placeholder='Enter Your Email'
             />
             <button
