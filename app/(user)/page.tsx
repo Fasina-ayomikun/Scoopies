@@ -30,11 +30,11 @@ export default function Home() {
       <Hero
         text={["Get your favorite ice", "cream flavor"]}
         desc='Lremdiiqe  oeiqeq eoqeqpe'
+        bgImg='home'
       />
       <BestOfWeek />
       <HomeMenu />
       <HomeTestimonial />
-      <Footer />
     </section>
   );
 }

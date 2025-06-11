@@ -18,6 +18,8 @@
   --color-pink-500: #FF85A1;
   --color-pink-300: #FBB1BD;
   --color-pink-100: #FAE0E4;
+  --shadow-main: 0px 0px 6px #6A00F4;
+  --shadow-inner: 0px 0px 6px #6A00F4 inset;
 
 }
 
@@ -27,6 +29,9 @@
     --foreground: #ededed;
   }
 } */
+* {
+  box-sizing: border-box;
+}
 
 body {
   background: var(--background);
@@ -44,11 +49,8 @@ body {
   }
 }
 
-.hero {
-  background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url("/assets/home.jpg") no-repeat center;
-  background-size: cover;
 
-}
+
 
 
 

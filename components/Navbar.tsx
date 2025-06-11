@@ -10,7 +10,7 @@ const Navbar = ({
   white?: boolean;
 }) => {
   return (
-    <header>
+    <header className='z-50 sticky  top-0 '>
       <nav className='flex items-center justify-between px-5 py-5 max-w-6xl mx-auto'>
         <Image
           src={white ? "/assets/logo-white.png" : "/assets/logo-coloured.png"}
