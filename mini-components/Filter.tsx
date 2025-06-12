@@ -5,7 +5,7 @@ const filters = ["all", "chocolate", "caramel", "mint", "strawberry"];
 const Filter = () => {
   const [active, setActive] = useState("all");
   return (
-    <div className='flex items-center gap-5 flex-wrap justify-center'>
+    <div className='flex items-center gap-5 flex-wrap justify-center mt-10'>
       {filters.map((filter, index) => {
         return (
           <button

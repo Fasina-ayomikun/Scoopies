@@ -10,6 +10,11 @@ export interface SignInUserInterface {
   email: string;
   password: string;
 }
+export interface sendMessageInterface {
+  name: string;
+  email: string;
+  message: string;
+}
 export interface UserInterface {
   name: string;
   email: string;

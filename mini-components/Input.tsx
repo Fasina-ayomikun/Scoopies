@@ -4,10 +4,12 @@ import React, { useState } from "react";
 import { FaInfo, FaInfoCircle } from "react-icons/fa";
 import { FaCircleXmark } from "react-icons/fa6";
 
-interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
+interface InputProps
+  extends React.InputHTMLAttributes<HTMLInputElement | HTMLTextAreaElement> {
   showForgot?: boolean;
   label?: string;
   error?: string;
+  textarea?: boolean;
 }
 
 const Input: React.FC<InputProps> = ({
@@ -15,6 +17,7 @@ const Input: React.FC<InputProps> = ({
   showForgot = false,
   label,
   error,
+  textarea = false,
   ...rest
 }) => {
   const [showPassword, setShowPassword] = useState(false);
@@ -30,15 +33,24 @@ const Input: React.FC<InputProps> = ({
         </label>
       )}
       <div className='bg-main-purple/3 border border-gray-300 rounded-md text-sm  w-full flex items-center gap-2  '>
-        <input
-          type={
-            type === "password" ? (showPassword ? "text" : "password") : type
-          }
-          name={label?.toLowerCase()}
-          id={label?.toLowerCase()}
-          className='rounded-md px-4 py-3 w-full h-full bg-transparent outline-main-purple/50  focus:outline-1 tracking-wide'
-          {...rest}
-        />
+        {textarea ? (
+          <textarea
+            name={label?.toLowerCase()}
+            id={label?.toLowerCase()}
+            className='rounded-md px-4 py-3 w-full h-full bg-transparent outline-main-purple/50  focus:outline-1 tracking-wide'
+            {...rest}
+          />
+        ) : (
+          <input
+            type={
+              type === "password" ? (showPassword ? "text" : "password") : type
+            }
+            name={label?.toLowerCase()}
+            id={label?.toLowerCase()}
+            className='rounded-md px-4 py-3 w-full h-full bg-transparent outline-main-purple/50  focus:outline-1 tracking-wide'
+            {...rest}
+          />
+        )}
         {type === "password" && (
           <span
             onClick={() => setShowPassword((prev) => !prev)}

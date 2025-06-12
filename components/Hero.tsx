@@ -7,7 +7,7 @@ import { useRouter } from "next/navigation";
 const Hero = ({
   text,
   navlink = "/menu",
-  bgImg = "menu",
+  bgImg = "home",
   desc,
 }: {
   text: string[];
@@ -18,11 +18,10 @@ const Hero = ({
   const navigate = useRouter();
   return (
     <section
-      className={`bg-[url(/assets/seo/${bgImg}.webp)] relative z-10 h-screen text-white  bg-no-repeat bg-center bg-cover`}
+      className={`relative z-10 h-screen text-white  bg-no-repeat bg-center bg-cover ${bgImg}`}
     >
-      <div className=' -z-10 absolute top-0 left-0 bottom-0 right-0 bg-linear-to-b  from-black/60  to-black/60'></div>
-
       <Navbar white={true} />
+      <div className=' -z-10 absolute top-0 left-0 bottom-0 right-0 bg-linear-to-b  from-black/60  to-black/60'></div>
 
       <div className='mt-[30vh] z-10'>
         <h1 className='text-center text-3xl font-lora font-semibold mb-2'>

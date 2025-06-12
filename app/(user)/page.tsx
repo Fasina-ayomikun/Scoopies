@@ -26,11 +26,11 @@ import {
 
 export default function Home() {
   return (
-    <section>
+    <section className='relative'>
       <Hero
         text={["Get your favorite ice", "cream flavor"]}
         desc='Lremdiiqe  oeiqeq eoqeqpe'
-        bgImg='home'
+        bgImg='bg-[url(/assets/seo/home.webp)]'
       />
       <BestOfWeek />
       <HomeMenu />

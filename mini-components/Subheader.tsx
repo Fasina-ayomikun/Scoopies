@@ -13,15 +13,16 @@ const Subheader = ({
   return (
     <div
       className={`${
-        direction === Direction.right
+        showArrow &&
+        (direction === Direction.right
           ? "flex-row-reverse pr-7 text-start"
-          : "flex-row pl-7 text-end"
-      } max-w-3xl mx-auto pb-10  flex items-center justify-between gap-4`}
+          : "flex-row pl-11 text-end")
+      } overflow-x-hidden max-w-3xl mx-auto   flex items-center justify-between gap-4`}
     >
       <h3
         className={`${
           showArrow ? "text-inherit  mx-0" : "text-center mx-auto"
-        } font-lora font-semibold text-coloured w-fit   text-xl whitespace-nowrap `}
+        } font-lora font-semibold text-coloured w-fit   text-2xl whitespace-nowrap `}
       >
         {text}
       </h3>
