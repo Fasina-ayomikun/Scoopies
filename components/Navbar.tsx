@@ -1,4 +1,5 @@
 "use client";
+import { useModalProvider } from "@/utils/context/modalContext";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import { FaAlignCenter, FaAlignJustify } from "react-icons/fa";
@@ -11,6 +12,7 @@ const Navbar = ({
   white?: boolean;
 }) => {
   const [isScrolled, setIsScrolled] = useState(false);
+  const { openSidebar } = useModalProvider();
   useEffect(() => {
     if (window) {
       window.addEventListener("scroll", () => {
@@ -49,7 +51,12 @@ const Navbar = ({
           alt='Scoopies'
           className={`w-20 md:w-24 `}
         />
-        {showToggle && <FaAlignJustify className='text-2xl md:hidden' />}
+        {showToggle && (
+          <FaAlignJustify
+            onClick={() => openSidebar()}
+            className='text-2xl md:hidden'
+          />
+        )}
       </nav>
     </header>
   );

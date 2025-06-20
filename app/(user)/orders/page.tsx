@@ -9,14 +9,13 @@ const OrdersPage = () => {
   return (
     <section>
       <Navbar />
-      <a
+      <button
         type='button'
-        href='/'
         className='flex items-center mx-auto w-11/12 gap-2 mt-10 mb-5'
       >
         <FaChevronLeft className='text-pink-900' />
         Back
-      </a>
+      </button>
       <h4 className='text-center capitalize font-lora font-semibold text-3xl text-main-purple  mb-1'>
         your orders
       </h4>

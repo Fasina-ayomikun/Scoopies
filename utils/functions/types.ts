@@ -23,6 +23,12 @@ export interface contextInterface {
   user: UserInterface;
   setUser: React.Dispatch<React.SetStateAction<UserInterface>>;
 }
+export interface modalContextInterface {
+  isSidebarOpen?: boolean;
+  setIsSidebarOpen?: React.Dispatch<React.SetStateAction<boolean>>;
+  openSidebar: () => void;
+  closeSidebar: () => void;
+}
 export enum Direction {
   left = "left",
   right = "right",

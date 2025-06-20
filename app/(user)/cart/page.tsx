@@ -19,14 +19,13 @@ const Cart = () => {
   return (
     <section>
       <Navbar />
-      <a
+      <button
         type='button'
-        href='/'
         className='flex items-center mx-auto w-11/12 gap-2 mt-10 mb-5'
       >
         <FaChevronLeft className='text-pink-900' />
         Back
-      </a>
+      </button>
       {/* Filled cart */}
       <CartFilled />
     </section>
