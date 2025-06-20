@@ -59,7 +59,11 @@ const Navbar = ({
     >
       <nav className='flex w-full items-center justify-between px-4 max-w-6xl mx-auto'>
         <Image
-          src={white ? "/assets/logo-white.png" : "/assets/logo-coloured.png"}
+          src={
+            isScrolled || white
+              ? "/assets/logo-white.png"
+              : "/assets/logo-coloured.png"
+          }
           width={100}
           height={100}
           alt='Scoopies'
@@ -68,13 +72,15 @@ const Navbar = ({
         {showToggle && (
           <FaAlignJustify
             onClick={() => openSidebar()}
-            className='text-2xl md:hidden'
+            className={`text-2xl md:hidden ${
+              isScrolled || white ? "text-white" : "text-gray-700"
+            }`}
           />
         )}
         <ul className=' md:flex items-center gap-5 hidden '>
           <li
             className={` cursor-pointer flex items-center gap-2 ${
-              white ? "text-white " : "text-gray-700"
+              isScrolled || white ? "text-white " : "text-gray-700"
             } ${pathname === "/" && "border-b border-pink-400"}`}
             onClick={() => {
               navigate.push("/");
@@ -84,7 +90,7 @@ const Navbar = ({
           </li>
           <li
             className={` cursor-pointer flex items-center gap-2 ${
-              white ? "text-white " : "text-gray-700"
+              isScrolled || white ? "text-white " : "text-gray-700"
             } ${pathname === "/menu" && "border-b border-pink-400"}`}
             onClick={() => {
               navigate.push("/menu");
@@ -94,7 +100,7 @@ const Navbar = ({
           </li>
           <li
             className={` cursor-pointer flex items-center gap-2 ${
-              white ? "text-white " : "text-gray-700"
+              isScrolled || white ? "text-white " : "text-gray-700"
             } ${pathname === "/about-us" && "border-b border-pink-400"}`}
             onClick={() => {
               navigate.push("/about-us");
@@ -104,7 +110,7 @@ const Navbar = ({
           </li>
           <li
             className={` cursor-pointer flex items-center gap-2 ${
-              white ? "text-white " : "text-gray-700"
+              isScrolled || white ? "text-white " : "text-gray-700"
             } ${pathname === "/contact" && "border-b border-pink-400"}`}
             onClick={() => {
               navigate.push("/contact");
@@ -116,7 +122,9 @@ const Navbar = ({
         <div className='hidden md:block'>
           <button
             className={`rounded-full  w-2 justify-center gap-2 btn capitalize ${
-              white ? "text-pink-900 bg-white" : "bg-pink-900 text-white"
+              isScrolled || white
+                ? "text-pink-900 bg-white"
+                : "bg-pink-900 text-white"
             }`}
           >
             sign in

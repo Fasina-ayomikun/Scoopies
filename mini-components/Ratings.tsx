@@ -23,9 +23,7 @@ const Ratings = ({ ratings }: { ratings: number }) => {
     );
   });
   return (
-    <div className='flex items-center gap-1 text-pink-900 text-lg'>
-      {tempStars}
-    </div>
+    <div className='flex items-center  text-pink-900 text-lg'>{tempStars}</div>
   );
 };
 

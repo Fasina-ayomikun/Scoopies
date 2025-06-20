@@ -7,7 +7,7 @@ const HomeMenu = () => {
   return (
     <section>
       <Subheader text='Our Menu' direction={Direction.right} />
-      <section className=' mt-10 p-3 grid grid-cols-1 gap-7 md:grid-cols-2 lg:grid-cols-3'>
+      <section className='w-11/12 max-w-6xl mx-auto mt-10 p-3 grid grid-cols-1 gap-7  sm:grid-cols-2 lg:grid-cols-3'>
         <MenuCard />
         <MenuCard />
         <MenuCard />

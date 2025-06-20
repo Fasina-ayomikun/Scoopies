@@ -10,7 +10,7 @@ const MenuDetails = () => {
       <Subheader text='Our Menu' showArrow={false} />
       <br />
       <Filter filters={menuFilters} />
-      <section className='p-3 grid my-6 grid-cols-1 gap-7 md:grid-cols-2 lg:grid-cols-3'>
+      <section className='max-w-6xl mx-auto p-3 grid my-6 grid-cols-1 gap-7 sm:grid-cols-2 lg:grid-cols-3'>
         <MenuCard />
         <MenuCard />
         <MenuCard />
