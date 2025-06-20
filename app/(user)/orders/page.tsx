@@ -1,15 +1,12 @@
-"use Client";
 import Navbar from "@/components/Navbar";
 import BackBtn from "@/mini-components/BackBtn";
 import Filter from "@/mini-components/Filter";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
 import React from "react";
 import { FaChevronLeft } from "react-icons/fa";
 import { MdCheck } from "react-icons/md";
 
 const OrdersPage = () => {
-  const navigator = useRouter();
   return (
     <section>
       <Navbar />

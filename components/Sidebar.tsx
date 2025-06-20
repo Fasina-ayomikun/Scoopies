@@ -44,7 +44,7 @@ const Sidebar = () => {
       onClick={() => closeSidebar()}
       className={`${
         isSidebarOpen ? "block" : "hidden"
-      } fixed top-0 bottom-0 left-0 right-0 bg-black/30 w-screen h-screen z-20`}
+      } fixed top-0 md:hidden bottom-0 left-0 right-0 bg-black/30 w-screen h-screen z-20`}
     >
       <div
         className='bg-white h-full w-4/5 '

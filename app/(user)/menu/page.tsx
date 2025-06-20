@@ -11,7 +11,7 @@ const Menu = () => {
       <Hero
         text={["Choose your favorite", "flavor"]}
         desc='Lremdiiqe  oeiqeq eoqeqpe'
-        bgImg='bg-[url(/assets/seo/menu.webp)]'
+        bgImg='bg-[url(/assets/seo/recipe4.webp)]'
       />
       <MenuDetails />
     </section>

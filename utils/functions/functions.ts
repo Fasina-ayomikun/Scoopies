@@ -27,10 +27,12 @@ export const signupWithEmail = async ({
       });
     }
     const user = result.user;
-    window.localStorage.setItem(
-      "SCOOPIES_CURRENT_USER",
-      JSON.stringify({ name: user.displayName, email: user.email })
-    );
+    if (window) {
+      window.localStorage.setItem(
+        "SCOOPIES_CURRENT_USER",
+        JSON.stringify({ name: user.displayName, email: user.email })
+      );
+    }
     console.log("====================================");
     console.log(user);
     console.log("====================================");
@@ -52,10 +54,12 @@ export const signinWithEmail = async ({
   try {
     const result = await signInWithEmailAndPassword(auth, email, password);
     const user = result.user;
-    window.localStorage.setItem(
-      "SCOOPIES_CURRENT_USER",
-      JSON.stringify({ name: user.displayName, email: user.email })
-    );
+    if (window) {
+      window.localStorage.setItem(
+        "SCOOPIES_CURRENT_USER",
+        JSON.stringify({ name: user.displayName, email: user.email })
+      );
+    }
 
     console.log("====================================");
     console.log(user);
@@ -78,10 +82,12 @@ export const signinWithGoogle = async () => {
     const token = credential?.accessToken;
     // The signed-in user info.
     const user = result.user;
-    window.localStorage.setItem(
-      "SCOOPIES_CURRENT_USER",
-      JSON.stringify({ name: user.displayName, email: user.email })
-    );
+    if (window) {
+      window.localStorage.setItem(
+        "SCOOPIES_CURRENT_USER",
+        JSON.stringify({ name: user.displayName, email: user.email })
+      );
+    }
   } catch (error) {
     console.log("====================================");
     console.log(error);

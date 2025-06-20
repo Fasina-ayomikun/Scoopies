@@ -1,3 +1,4 @@
+"use client";
 import Input from "@/mini-components/Input";
 import Image from "next/image";
 import Link from "next/link";

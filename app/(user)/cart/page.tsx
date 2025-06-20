@@ -8,7 +8,6 @@ const Cart = () => {
     <section>
       <Navbar />
       <BackBtn />
-
       {/* Filled cart */}
       <CartFilled />
     </section>
