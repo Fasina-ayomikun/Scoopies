@@ -19,10 +19,14 @@ const SingleRecipe = () => {
   return (
     <section>
       <Navbar />
-      <p className='flex items-center mx-auto w-11/12 gap-2 mt-10 mb-5'>
+      <a
+        type='button'
+        href='/'
+        className='flex items-center mx-auto w-11/12 gap-2 mt-10 mb-5'
+      >
         <FaChevronLeft className='text-pink-900' />
         Back
-      </p>
+      </a>
       <section className='grid grid-cols-1 gap-9 md:grid-cols-2 w-11/12 mx-auto max-w-6xl mt-10'>
         <section className='flex flex-col gap-6'>
           <div className='relative w-full min-h-92'>
