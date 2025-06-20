@@ -1,31 +1,14 @@
 import CartFilled from "@/components/CartFilled";
 import Navbar from "@/components/Navbar";
-import CartItem from "@/mini-components/CartItem";
-import Subheader from "@/mini-components/Subheader";
-import Image from "next/image";
+import BackBtn from "@/mini-components/BackBtn";
 import React from "react";
-import { FaChevronLeft, FaMinus, FaPlus, FaShoppingCart } from "react-icons/fa";
-import {
-  MdLineAxis,
-  MdOutlineRemoveShoppingCart,
-  MdOutlineShoppingCart,
-  MdPlusOne,
-  MdRemoveShoppingCart,
-  MdShoppingCart,
-  MdShoppingCartCheckout,
-} from "react-icons/md";
 
 const Cart = () => {
   return (
     <section>
       <Navbar />
-      <button
-        type='button'
-        className='flex items-center mx-auto w-11/12 gap-2 mt-10 mb-5'
-      >
-        <FaChevronLeft className='text-pink-900' />
-        Back
-      </button>
+      <BackBtn />
+
       {/* Filled cart */}
       <CartFilled />
     </section>

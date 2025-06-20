@@ -1,5 +1,6 @@
 import CartFilled from "@/components/CartFilled";
 import Navbar from "@/components/Navbar";
+import BackBtn from "@/mini-components/BackBtn";
 import CartItem from "@/mini-components/CartItem";
 import Subheader from "@/mini-components/Subheader";
 import Image from "next/image";
@@ -19,13 +20,7 @@ const SingleRecipe = () => {
   return (
     <section>
       <Navbar />
-      <button
-        type='button'
-        className='flex items-center mx-auto w-11/12 gap-2 mt-10 mb-5'
-      >
-        <FaChevronLeft className='text-pink-900' />
-        Back
-      </button>
+      <BackBtn />
       <section className='grid grid-cols-1 gap-9 md:grid-cols-2 w-11/12 mx-auto max-w-6xl mt-10'>
         <section className='flex flex-col gap-6'>
           <div className='relative w-full min-h-92'>

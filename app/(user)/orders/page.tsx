@@ -1,21 +1,19 @@
+"use Client";
 import Navbar from "@/components/Navbar";
+import BackBtn from "@/mini-components/BackBtn";
 import Filter from "@/mini-components/Filter";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import React from "react";
 import { FaChevronLeft } from "react-icons/fa";
 import { MdCheck } from "react-icons/md";
 
 const OrdersPage = () => {
+  const navigator = useRouter();
   return (
     <section>
       <Navbar />
-      <button
-        type='button'
-        className='flex items-center mx-auto w-11/12 gap-2 mt-10 mb-5'
-      >
-        <FaChevronLeft className='text-pink-900' />
-        Back
-      </button>
+      <BackBtn />
       <h4 className='text-center capitalize font-lora font-semibold text-3xl text-main-purple  mb-1'>
         your orders
       </h4>
