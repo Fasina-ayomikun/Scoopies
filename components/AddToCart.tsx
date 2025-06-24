@@ -14,7 +14,7 @@ const AddToCart = () => {
     >
       <main
         onClick={(e) => e.stopPropagation()}
-        className='bg-white py-7 rounded-md w-4/5 h-fit max-w-2xl '
+        className='bg-white py-7 rounded-md w-4/5 h-fit  max-w-2xl '
       >
         <div className=' flex items-center justify-end w-11/12 mx-auto mb-6'>
           <FaTimes
@@ -22,28 +22,31 @@ const AddToCart = () => {
             onClick={() => setOpenAddToCart(false)}
           />
         </div>
-        <div className='grid grid-cols-3 w-11/12 mx-auto items-center gap-1 justify-start mb-4 '>
-          <Image
-            src={"/assets/seo/recipe1.webp"}
-            alt='recipe'
-            width={200}
-            height={200}
-            className='object-cover rounded-md w-full aspect-square border-2 border-pink-900'
-          />
-          <Image
-            src={"/assets/seo/recipe2.webp"}
-            alt='recipe'
-            width={200}
-            height={200}
-            className='object-cover rounded-md w-full aspect-square'
-          />
-          <Image
-            src={"/assets/seo/recipe2.webp"}
-            alt='recipe'
-            width={200}
-            height={200}
-            className='object-cover rounded-md w-full aspect-square'
-          />
+        <div className=' grid grid-cols-3 w-11/12  h-25 mx-auto items-center gap-1 justify-start mb-4 '>
+          <div className='h-full relative'>
+            <Image
+              src={"/assets/seo/recipe1.webp"}
+              alt='recipe'
+              fill
+              className='object-cover rounded-md w-full h-full border-2 border-pink-900'
+            />
+          </div>
+          <div className='h-full relative'>
+            <Image
+              src={"/assets/seo/recipe2.webp"}
+              alt='recipe'
+              fill
+              className='object-cover rounded-md w-full h-full'
+            />
+          </div>
+          <div className='h-full relative'>
+            <Image
+              src={"/assets/seo/recipe2.webp"}
+              alt='recipe'
+              fill
+              className='object-cover rounded-md w-full h-full'
+            />
+          </div>
         </div>
         <h3 className='font-semibold w-11/12 mx-auto md:text-2xl text-lg mb-2'>
           Creamy Chocolate
