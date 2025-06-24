@@ -1,3 +1,4 @@
+import { useModalProvider } from "@/utils/context/modalContext";
 import Image from "next/image";
 import React from "react";
 import { FaMinus, FaPlus } from "react-icons/fa";

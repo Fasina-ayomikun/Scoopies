@@ -6,6 +6,7 @@ const modalContext = createContext<modalContextInterface>(null!);
 
 function ModalProvider({ children }: { children: React.ReactNode }) {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [openAddToCart, setOpenAddToCart] = useState(false);
   const openSidebar = () => {
     setIsSidebarOpen(true);
   };
@@ -13,7 +14,15 @@ function ModalProvider({ children }: { children: React.ReactNode }) {
     setIsSidebarOpen(false);
   };
   return (
-    <modalContext.Provider value={{ openSidebar, closeSidebar, isSidebarOpen }}>
+    <modalContext.Provider
+      value={{
+        openAddToCart,
+        setOpenAddToCart,
+        openSidebar,
+        closeSidebar,
+        isSidebarOpen,
+      }}
+    >
       {children}
     </modalContext.Provider>
   );

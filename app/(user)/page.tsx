@@ -1,4 +1,5 @@
 "use client";
+import AddToCart from "@/components/AddToCart";
 import BestOfWeek from "@/components/BestOfWeek";
 import Footer from "@/components/Footer";
 import Hero from "@/components/Hero";
@@ -35,6 +36,7 @@ export default function Home() {
       <BestOfWeek />
       <HomeMenu />
       <HomeTestimonial />
+      <AddToCart />
     </section>
   );
 }

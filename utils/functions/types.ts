@@ -28,6 +28,8 @@ export interface modalContextInterface {
   setIsSidebarOpen?: React.Dispatch<React.SetStateAction<boolean>>;
   openSidebar: () => void;
   closeSidebar: () => void;
+  openAddToCart: boolean;
+  setOpenAddToCart: React.Dispatch<React.SetStateAction<boolean>>;
 }
 export enum Direction {
   left = "left",

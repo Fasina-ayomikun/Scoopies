@@ -4,9 +4,12 @@ import { MdAddCircleOutline } from "react-icons/md";
 import Ratings from "./Ratings";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import { useModalProvider } from "@/utils/context/modalContext";
 
 const MenuCard = () => {
   const navigator = useRouter();
+  const { setOpenAddToCart } = useModalProvider();
+
   return (
     <div className='w-full mx-auto shadow-main  p-4 rounded-lg shadow-main-purple/30'>
       <div className='relative w-full h-52 mb-4'>
@@ -39,8 +42,16 @@ const MenuCard = () => {
       </p>
 
       <button className='cursor-pointer flex items-center gap-2 capitalize justify-end w-full mt-6'>
-        <MdAddCircleOutline className='text-2xl text-pink-900' />
-        <span className='underline text-sm'>Add to cart</span>
+        <MdAddCircleOutline
+          className='text-2xl text-pink-900'
+          onClick={() => setOpenAddToCart(true)}
+        />
+        <span
+          className='underline text-sm'
+          onClick={() => setOpenAddToCart(true)}
+        >
+          Add to cart
+        </span>
       </button>
     </div>
   );
