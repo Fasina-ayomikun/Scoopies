@@ -5,7 +5,7 @@ import React from "react";
 
 const Cart = () => {
   return (
-    <section>
+    <section className='max-w-6xl mx-auto'>
       <Navbar />
       <BackBtn />
       {/* Filled cart */}

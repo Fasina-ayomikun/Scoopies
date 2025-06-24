@@ -13,7 +13,7 @@ import { IoMdClock } from "react-icons/io";
 
 const LocationCard = () => {
   return (
-    <div className='w-11/12 mx-auto shadow-main  p-4 rounded-lg shadow-main-purple/30'>
+    <div className='w-full mx-auto shadow-main  p-4 rounded-lg shadow-main-purple/30'>
       <div className='relative w-full h-52 mb-4'>
         <Image
           src={"/assets/menu.jpg"}

@@ -16,7 +16,7 @@ const Subheader = ({
         showArrow &&
         (direction === Direction.right
           ? "flex-row-reverse pr-7 text-start"
-          : "flex-row pl-11 text-end")
+          : "flex-row  text-end")
       } overflow-x-hidden max-w-6xl mx-auto   flex items-center justify-between gap-4`}
     >
       <h3

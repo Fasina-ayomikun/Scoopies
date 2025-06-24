@@ -30,10 +30,10 @@ const Contact = () => {
         desc='Lremuwei rwro owriwo r'
         bgImg='bg-[url(/assets/seo/contact.webp)]'
       />
-      <section className='py-6 px-3'>
+      <section className='py-10 md:h-screen px-3'>
         <Subheader text='Contact Us' showArrow={false} />
         <form
-          className='mt-10 w-11/12 mx-auto'
+          className='mt-10 w-11/12 mx-auto max-w-2xl'
           onSubmit={handleSubmit(formSubmitHandler, (errors) => {
             console.log("====================================");
             console.log(errors);

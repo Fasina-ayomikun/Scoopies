@@ -10,6 +10,8 @@ import { registerSchema } from "@/utils/functions/schema";
 import { signinWithGoogle, signupWithEmail } from "@/utils/functions/functions";
 import { useContextProvider } from "@/utils/context/authContext";
 import { useRouter } from "next/navigation";
+import axios from "axios";
+import { toast } from "react-toastify";
 
 const SignUp = () => {
   const [screenWidth, setScreenWidth] = useState(0);
@@ -32,24 +34,40 @@ const SignUp = () => {
       console.log(data, errors);
       console.log("====================================");
       if (termsCheck && data.password === data.confirmPassword) {
-        await signupWithEmail({
-          name: data.name,
-          email: data.email,
-          password: data.password,
-        });
-
-        let user: string | UserInterface | null = window.localStorage.getItem(
-          "SCOOPIES_CURRENT_USER"
+        const response = await axios.post(
+          "/api/auth/register",
+          {
+            name: data.name,
+            email: data.email,
+            password: data.password,
+            loggedInWithPassword: true,
+          },
+          {
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
         );
-        user = user ? JSON.parse(user) : null;
-        if (user) {
+        console.log(response);
+        if (response.status === 201) {
+          const user = response.data.user;
+          if (window) {
+            window.localStorage.setItem(
+              "SCOOPIES_CURRENT_USER",
+              JSON.stringify({ name: user.name, email: user.email })
+            );
+          }
           setUser(user as UserInterface);
           navigate.push("/");
+          toast.success(response.data.message);
         }
       }
     } catch (error) {
       console.log("====================================");
       console.log(error);
+      if (axios.isAxiosError(error)) {
+        toast.warn(error.message);
+      }
       console.log("====================================");
     } finally {
       setIsLoading(false);
@@ -135,17 +153,6 @@ const SignUp = () => {
               </label>
             </div>
             <button
-              onClick={() => {
-                signinWithGoogle();
-                let user: string | UserInterface | null =
-                  window.localStorage.getItem("SCOOPIES_CURRENT_USER");
-                user = user ? JSON.parse(user) : null;
-                if (user) {
-                  setUser(user as UserInterface);
-
-                  navigate.push("/");
-                }
-              }}
               type='submit'
               disabled={isLoading}
               className='btn bg-pink-900 text-white w-full capitalize'

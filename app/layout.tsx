@@ -3,7 +3,7 @@ import { Geist, Geist_Mono, Poppins, Lora } from "next/font/google";
 import "./globals.css";
 import AuthProvider from "@/utils/context/authContext";
 import ModalProvider from "@/utils/context/modalContext";
-
+import { Slide, ToastContainer } from "react-toastify";
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -39,7 +39,22 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} ${poppins.variable} ${lora.variable} antialiased`}
       >
         <AuthProvider>
-          <ModalProvider>{children}</ModalProvider>
+          <ModalProvider>
+            <ToastContainer
+              position='top-right'
+              autoClose={2000}
+              hideProgressBar={false}
+              newestOnTop={false}
+              closeOnClick
+              rtl={false}
+              pauseOnFocusLoss
+              draggable
+              pauseOnHover
+              theme='colored'
+              transition={Slide}
+            />{" "}
+            {children}
+          </ModalProvider>
         </AuthProvider>
       </body>
     </html>

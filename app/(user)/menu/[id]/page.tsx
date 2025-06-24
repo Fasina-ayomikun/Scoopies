@@ -21,8 +21,8 @@ const SingleRecipe = () => {
     <section>
       <Navbar />
       <BackBtn />
-      <section className='grid grid-cols-1 gap-9 md:grid-cols-2 w-11/12 mx-auto max-w-6xl mt-10'>
-        <section className='flex flex-col gap-6'>
+      <section className='grid grid-cols-1  gap-9 md:grid-cols-2 w-11/12 mx-auto max-w-6xl mt-10'>
+        <section className='flex  flex-col gap-6'>
           <div className='relative w-full min-h-92'>
             <Image
               src={"/assets/seo/recipe2.webp"}
@@ -40,7 +40,7 @@ const SingleRecipe = () => {
                 alt='recipe'
                 width={200}
                 height={200}
-                className='object-cover rounded-md w-full aspect-square'
+                className='object-cover rounded-md w-full aspect-square '
               />
               <Image
                 src={"/assets/seo/recipe2.webp"}
@@ -60,7 +60,9 @@ const SingleRecipe = () => {
           </div>
         </section>
         <section>
-          <h3 className='font-semibold text-lg mb-2'>Creamy Chocolate</h3>
+          <h3 className='font-semibold md:text-2xl text-lg mb-2'>
+            Creamy Chocolate
+          </h3>
           <p className='text-sm text-gray-600 mb-8'>
             Lorem ipsum dolor sit, amet consectetur adipisicing elit. Unde
             impedit ad dolor corporis accusantium inventore ipsum illo, quis
@@ -74,7 +76,7 @@ const SingleRecipe = () => {
             <li className='px-5 my-1'>Chocolate</li>
             <li className='px-5 my-1'>Chocolate</li>
           </ul>
-          <button className='capitalize flex justify-center btn bg-main-purple w-32 text-white mx-auto my-7'>
+          <button className='md:w-full capitalize flex justify-center btn bg-main-purple w-32 text-white mx-auto my-7'>
             order now
           </button>
         </section>

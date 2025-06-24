@@ -1,0 +1,56 @@
+import User from "@/app/models/user";
+import { connectToDB } from "@/app/utils/connect";
+import bcrypt from "bcryptjs";
+import jwt from "jsonwebtoken";
+import { cookies } from "next/headers";
+import { NextResponse } from "next/server";
+export const POST = async (req: Request, res: Response) => {
+  const { email, password } = await req.json();
+  try {
+    await connectToDB();
+
+    if (!email || !password) {
+      return NextResponse.json("Please provide all credentials", {
+        status: 400,
+      });
+    }
+    const userExists = await User.findOne({ email });
+    if (!userExists) {
+      return NextResponse.json("User not registered", { status: 403 });
+    }
+    if (!userExists.loggedInWithPassword) {
+      return NextResponse.json(
+        "Seems this user registered using google, kindly login using the same method",
+        { status: 400 }
+      );
+    } else {
+      const comparePassword = await bcrypt.compare(
+        password,
+        userExists.password
+      );
+      if (!comparePassword) {
+        return NextResponse.json("Incorrect Password", { status: 400 });
+      }
+    }
+
+    const cookieStore = await cookies();
+    const token = cookieStore.get("scoopies_token");
+    let verifiedUser = {};
+    if (token?.value) {
+      verifiedUser = jwt.verify(token?.value, "JWT_SECRET");
+
+      if (!verifiedUser) {
+        return NextResponse.json("Unauthenticated user", { status: 403 });
+      }
+    } else {
+      return NextResponse.json("Unauthenticated user", { status: 403 });
+    }
+
+    return NextResponse.json({
+      message: "Successfully logged in",
+      user: verifiedUser,
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};

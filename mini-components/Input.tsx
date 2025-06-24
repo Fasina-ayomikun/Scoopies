@@ -37,6 +37,7 @@ const Input: React.FC<InputProps> = ({
           <textarea
             name={label?.toLowerCase()}
             id={label?.toLowerCase()}
+            rows={6}
             className='rounded-md px-4 py-3 w-full h-full bg-transparent outline-main-purple/50  focus:outline-1 tracking-wide'
             {...rest}
           />
@@ -52,12 +53,13 @@ const Input: React.FC<InputProps> = ({
           />
         )}
         {type === "password" && (
-          <span
+          <button
+            type='button'
             onClick={() => setShowPassword((prev) => !prev)}
             className='underline  text-main-purple text-sm font-medium px-4 py-1 cursor-pointer'
           >
             {showPassword ? "Hide" : "Show"}
-          </span>
+          </button>
         )}
       </div>
       {showForgot && (

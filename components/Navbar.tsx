@@ -55,7 +55,7 @@ const Navbar = ({
     <header
       className={`z-50 h-20  self-start row-span-1 flex items-center justify-center ${
         isScrolled && "fixed  top-0 left-0 right-0 bg-main-purple "
-      }`}
+      } `}
     >
       <nav className='flex w-full items-center justify-between px-4 max-w-6xl mx-auto'>
         <Image
@@ -65,71 +65,79 @@ const Navbar = ({
               : "/assets/logo-coloured.png"
           }
           width={100}
+          onClick={() => {
+            navigate.push("/");
+          }}
           height={100}
           alt='Scoopies'
           className={`w-20 md:w-24 `}
         />
         {showToggle && (
-          <FaAlignJustify
-            onClick={() => openSidebar()}
-            className={`text-2xl md:hidden ${
-              isScrolled || white ? "text-white" : "text-gray-700"
-            }`}
-          />
+          <>
+            <FaAlignJustify
+              onClick={() => openSidebar()}
+              className={`text-2xl md:hidden ${
+                isScrolled || white ? "text-white" : "text-gray-700"
+              }`}
+            />
+            <ul className=' md:flex items-center gap-5 hidden '>
+              <li
+                className={` cursor-pointer flex items-center gap-2 ${
+                  isScrolled || white ? "text-white " : "text-gray-700"
+                } ${pathname === "/" && "border-b border-pink-400"}`}
+                onClick={() => {
+                  navigate.push("/");
+                }}
+              >
+                Home{" "}
+              </li>
+              <li
+                className={` cursor-pointer flex items-center gap-2 ${
+                  isScrolled || white ? "text-white " : "text-gray-700"
+                } ${pathname === "/menu" && "border-b border-pink-400"}`}
+                onClick={() => {
+                  navigate.push("/menu");
+                }}
+              >
+                Menu
+              </li>
+              <li
+                className={` cursor-pointer flex items-center gap-2 ${
+                  isScrolled || white ? "text-white " : "text-gray-700"
+                } ${pathname === "/about-us" && "border-b border-pink-400"}`}
+                onClick={() => {
+                  navigate.push("/about-us");
+                }}
+              >
+                About
+              </li>
+              <li
+                className={` cursor-pointer flex items-center gap-2 ${
+                  isScrolled || white ? "text-white " : "text-gray-700"
+                } ${pathname === "/contact" && "border-b border-pink-400"}`}
+                onClick={() => {
+                  navigate.push("/contact");
+                }}
+              >
+                Contact
+              </li>
+            </ul>
+            <div className='hidden md:block'>
+              <button
+                onClick={() => {
+                  navigate.push("/signin");
+                }}
+                className={`rounded-full  w-2 justify-center gap-2 btn capitalize ${
+                  isScrolled || white
+                    ? "text-pink-900 bg-white"
+                    : "bg-pink-900 text-white"
+                }`}
+              >
+                sign in
+              </button>
+            </div>
+          </>
         )}
-        <ul className=' md:flex items-center gap-5 hidden '>
-          <li
-            className={` cursor-pointer flex items-center gap-2 ${
-              isScrolled || white ? "text-white " : "text-gray-700"
-            } ${pathname === "/" && "border-b border-pink-400"}`}
-            onClick={() => {
-              navigate.push("/");
-            }}
-          >
-            Home{" "}
-          </li>
-          <li
-            className={` cursor-pointer flex items-center gap-2 ${
-              isScrolled || white ? "text-white " : "text-gray-700"
-            } ${pathname === "/menu" && "border-b border-pink-400"}`}
-            onClick={() => {
-              navigate.push("/menu");
-            }}
-          >
-            Menu
-          </li>
-          <li
-            className={` cursor-pointer flex items-center gap-2 ${
-              isScrolled || white ? "text-white " : "text-gray-700"
-            } ${pathname === "/about-us" && "border-b border-pink-400"}`}
-            onClick={() => {
-              navigate.push("/about-us");
-            }}
-          >
-            About
-          </li>
-          <li
-            className={` cursor-pointer flex items-center gap-2 ${
-              isScrolled || white ? "text-white " : "text-gray-700"
-            } ${pathname === "/contact" && "border-b border-pink-400"}`}
-            onClick={() => {
-              navigate.push("/contact");
-            }}
-          >
-            Contact
-          </li>
-        </ul>
-        <div className='hidden md:block'>
-          <button
-            className={`rounded-full  w-2 justify-center gap-2 btn capitalize ${
-              isScrolled || white
-                ? "text-pink-900 bg-white"
-                : "bg-pink-900 text-white"
-            }`}
-          >
-            sign in
-          </button>
-        </div>
       </nav>
     </header>
   );

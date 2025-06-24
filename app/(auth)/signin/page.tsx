@@ -18,6 +18,8 @@ import {
 } from "@/utils/functions/functions";
 import { useContextProvider } from "@/utils/context/authContext";
 import { useRouter } from "next/navigation";
+import axios from "axios";
+import { toast } from "react-toastify";
 
 const SignIn = () => {
   const [screenWidth, setScreenWidth] = useState(0);
@@ -38,23 +40,38 @@ const SignIn = () => {
       console.log("====================================");
       console.log(data, errors);
       console.log("====================================");
-      await signinWithEmail({
-        email: data.email,
-        password: data.password,
-      });
-      let user: string | UserInterface | null = window.localStorage.getItem(
-        "SCOOPIES_CURRENT_USER"
+      const response = await axios.post(
+        "/api/auth/login",
+        {
+          email: data.email,
+          password: data.password,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
       );
-      user = user ? JSON.parse(user) : null;
-      if (user) {
+      console.log(response);
+      if (response.status === 200) {
+        const user = response.data.user;
+        if (window) {
+          window.localStorage.setItem(
+            "SCOOPIES_CURRENT_USER",
+            JSON.stringify({ name: user.name, email: user.email })
+          );
+        }
         setUser(user as UserInterface);
-
         navigate.push("/");
+        toast.success(response.data.message);
       }
     } catch (error) {
       console.log("====================================");
       console.log(error);
       console.log("====================================");
+      if (axios.isAxiosError(error)) {
+        toast.warn(String(error));
+      }
     } finally {
       setIsLoading(false);
     }
@@ -65,10 +82,10 @@ const SignIn = () => {
     }
   }, []);
   return (
-    <section className='form-background pb-15 min-h-screen'>
+    <section className='form-background pb-15 min-h-screen w-full '>
       <Navbar showToggle={false} white={screenWidth >= 768} />
-      <section>
-        <section className=' bg-white rounded-md md:shadow-xl  max-w-2xl mx-auto px-10 py-8 w-md my-4'>
+      <section className='   min-h-[110vh] w-full'>
+        <section className='bg-white   rounded-md md:shadow-xl  max-w-2xl mx-auto px-10 py-8 md:w-md w-full my-4'>
           <h2 className='text-main-purple text-3xl text-center font-semibold font-lora'>
             Welcome to Scoopies
           </h2>
