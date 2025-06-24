@@ -1,4 +1,5 @@
 "use client";
+import { useContextProvider } from "@/utils/context/authContext";
 import { useModalProvider } from "@/utils/context/modalContext";
 import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
@@ -9,6 +10,7 @@ import {
   MdContactPhone,
   MdHome,
   MdInfo,
+  MdLogin,
   MdLogout,
   MdMenu,
   MdMenuBook,
@@ -39,6 +41,7 @@ const Sidebar = () => {
   const pathname = usePathname();
   const navigate = useRouter();
   const { closeSidebar, isSidebarOpen } = useModalProvider();
+  const { user } = useContextProvider();
   return (
     <aside
       onClick={() => closeSidebar()}
@@ -106,24 +109,36 @@ const Sidebar = () => {
           >
             <MdContactPhone className='text-2xl' /> <span>Contact</span>
           </li>
-          <li
-            className={`mb-4 flex items-center gap-2 text-main-purple   py-3 px-5 text-lg ${
-              pathname === "/cart" && "bg-main-purple/8"
-            }`}
-            onClick={() => {
-              closeSidebar();
-              navigate.push("/cart");
-            }}
-          >
-            <MdShoppingCart className='text-2xl' /> <span>Cart</span>
-          </li>
-          <li
-            className={`mb-4 flex items-center gap-2 text-main-purple   py-3 px-5 text-lg ${
-              pathname === "/logout" && "bg-main-purple/8"
-            }`}
-          >
-            <MdLogout className='text-2xl' /> <span>Logout</span>
-          </li>
+          {user.email ? (
+            <>
+              <li
+                className={`mb-4 flex items-center gap-2 text-main-purple   py-3 px-5 text-lg ${
+                  pathname === "/cart" && "bg-main-purple/8"
+                }`}
+                onClick={() => {
+                  closeSidebar();
+                  navigate.push("/cart");
+                }}
+              >
+                <MdShoppingCart className='text-2xl' /> <span>Cart</span>
+              </li>
+              <li
+                className={`mb-4 flex items-center gap-2 text-main-purple   py-3 px-5 text-lg ${
+                  pathname === "/logout" && "bg-main-purple/8"
+                }`}
+              >
+                <MdLogout className='text-2xl' /> <span>Logout</span>
+              </li>
+            </>
+          ) : (
+            <li
+              className={`mb-4 flex items-center gap-2 text-main-purple   py-3 px-5 text-lg ${
+                pathname === "/signin" && "bg-main-purple/8"
+              }`}
+            >
+              <MdLogin className='text-2xl' /> <span>Sign In</span>
+            </li>
+          )}
         </ul>
       </div>
     </aside>

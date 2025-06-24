@@ -8,8 +8,9 @@ import HomeTestimonial from "@/components/HomeTestimonial";
 import Navbar from "@/components/Navbar";
 import Ratings from "@/mini-components/Ratings";
 import Subheader from "@/mini-components/Subheader";
+import { useContextProvider } from "@/utils/context/authContext";
 import { signinWithGoogle, signupWithEmail } from "@/utils/functions/functions";
-import { Direction } from "@/utils/functions/types";
+import { Direction, UserInterface } from "@/utils/functions/types";
 import { signInWithPopup } from "firebase/auth";
 import Image from "next/image";
 import { useEffect } from "react";
@@ -26,6 +27,16 @@ import {
 } from "react-icons/md";
 
 export default function Home() {
+  const { setUser } = useContextProvider();
+  useEffect(() => {
+    let user: string | UserInterface | null = window.localStorage.getItem(
+      "SCOOPIES_CURRENT_USER"
+    );
+    user = user ? JSON.parse(user) : null;
+    if (user) {
+      setUser(user as UserInterface);
+    }
+  }, []);
   return (
     <section className='relative'>
       <Hero

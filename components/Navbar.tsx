@@ -1,4 +1,5 @@
 "use client";
+import { useContextProvider } from "@/utils/context/authContext";
 import { useModalProvider } from "@/utils/context/modalContext";
 import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
@@ -26,6 +27,7 @@ const Navbar = ({
   const { openSidebar } = useModalProvider();
   const pathname = usePathname();
   const navigate = useRouter();
+  const { user } = useContextProvider();
 
   useEffect(() => {
     if (window) {
@@ -123,18 +125,42 @@ const Navbar = ({
               </li>
             </ul>
             <div className='hidden md:block'>
-              <button
-                onClick={() => {
-                  navigate.push("/signin");
-                }}
-                className={`rounded-full  w-2 justify-center gap-2 btn capitalize ${
-                  isScrolled || white
-                    ? "text-pink-900 bg-white"
-                    : "bg-pink-900 text-white"
-                }`}
-              >
-                sign in
-              </button>
+              {user.email ? (
+                <div className='flex items-center gap-3'>
+                  <p
+                    className={`${
+                      isScrolled || white ? "text-white" : "text-gray-800"
+                    } text-sm `}
+                  >
+                    Welcome, {user.name}
+                  </p>
+                  <button
+                    onClick={() => {
+                      navigate.push("/signin");
+                    }}
+                    className={`rounded-full  w-2 justify-center gap-2 btn capitalize ${
+                      isScrolled || white
+                        ? "text-pink-900 bg-white"
+                        : "bg-pink-900 text-white"
+                    }`}
+                  >
+                    Logout
+                  </button>
+                </div>
+              ) : (
+                <button
+                  onClick={() => {
+                    navigate.push("/signin");
+                  }}
+                  className={`rounded-full  w-2 justify-center gap-2 btn capitalize ${
+                    isScrolled || white
+                      ? "text-pink-900 bg-white"
+                      : "bg-pink-900 text-white"
+                  }`}
+                >
+                  sign in
+                </button>
+              )}
             </div>
           </>
         )}
