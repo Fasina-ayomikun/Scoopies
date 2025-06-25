@@ -11,11 +11,7 @@ import React, { useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { loginSchema, registerSchema } from "@/utils/functions/schema";
-import {
-  signinWithEmail,
-  signinWithGoogle,
-  signupWithEmail,
-} from "@/utils/functions/functions";
+
 import { useContextProvider } from "@/utils/context/authContext";
 import { useRouter } from "next/navigation";
 import axios from "axios";
@@ -133,7 +129,6 @@ const SignIn = () => {
             </div>
             <button
               onClick={() => {
-                signinWithGoogle();
                 let user: string | UserInterface | null =
                   window.localStorage.getItem("SCOOPIES_CURRENT_USER");
                 user = user ? JSON.parse(user) : null;

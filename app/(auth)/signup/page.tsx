@@ -7,7 +7,6 @@ import React, { useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { registerSchema } from "@/utils/functions/schema";
-import { signinWithGoogle, signupWithEmail } from "@/utils/functions/functions";
 import { useContextProvider } from "@/utils/context/authContext";
 import { useRouter } from "next/navigation";
 import axios from "axios";

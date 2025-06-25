@@ -9,7 +9,6 @@ import Navbar from "@/components/Navbar";
 import Ratings from "@/mini-components/Ratings";
 import Subheader from "@/mini-components/Subheader";
 import { useContextProvider } from "@/utils/context/authContext";
-import { signinWithGoogle, signupWithEmail } from "@/utils/functions/functions";
 import { Direction, UserInterface } from "@/utils/functions/types";
 import { signInWithPopup } from "firebase/auth";
 import Image from "next/image";

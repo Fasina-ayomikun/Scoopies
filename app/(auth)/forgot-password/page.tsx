@@ -1,7 +1,6 @@
 "use client";
 import Navbar from "@/components/Navbar";
 import Input from "@/mini-components/Input";
-import { passwordResetEmail } from "@/utils/functions/functions";
 import React, { useState } from "react";
 
 const ForgotPassword = () => {
@@ -21,7 +20,6 @@ const ForgotPassword = () => {
             className='mt-10'
             onSubmit={(e) => {
               e.preventDefault();
-              passwordResetEmail(email);
             }}
           >
             <Input
