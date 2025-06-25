@@ -5,7 +5,7 @@ import { serialize } from "cookie";
 import { NextResponse } from "next/server";
 import { connectToDB } from "@/app/utils/connect";
 
-export const POST = async (req: Request, res: Response) => {
+export const POST = async (req: Request, res: any) => {
   const { name, loggedInWithPassword, email, password } = await req.json();
   try {
     await connectToDB();
