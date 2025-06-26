@@ -4,6 +4,7 @@ import "./globals.css";
 import AuthProvider from "@/utils/context/authContext";
 import ModalProvider from "@/utils/context/modalContext";
 import { Slide, ToastContainer } from "react-toastify";
+import IceCreamProvider from "@/utils/context/iceCreamContext";
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -53,7 +54,7 @@ export default function RootLayout({
               theme='colored'
               transition={Slide}
             />{" "}
-            {children}
+            <IceCreamProvider>{children}</IceCreamProvider>
           </ModalProvider>
         </AuthProvider>
       </body>

@@ -1,0 +1,74 @@
+const mongoose = require("mongoose");
+var validator = require("validator");
+
+const ReviewsSchema = new mongoose.Schema(
+  {
+    ratings: {
+      type: Number,
+      min: 1,
+      max: 5,
+      required: [true, "Please provide a rating"],
+      validate: {
+        validator: function (value: string) {
+          // Check if the value is a number
+          return typeof value === "number";
+        },
+        message: (props: { path: string }) => `${props.path} must be a number!`,
+      },
+    },
+    title: {
+      type: String,
+      required: [true, "Please provide a title"],
+      trim: true,
+      maxLength: 30,
+    },
+    comment: {
+      type: String,
+      required: [true, "Please share your comment"],
+    },
+
+    user: {
+      type: mongoose.Types.ObjectId,
+      required: true,
+      ref: "User",
+    },
+    recipe: {
+      type: mongoose.Types.ObjectId,
+      required: true,
+      ref: "Recipe",
+    },
+  },
+  { timestamps: true }
+);
+
+ReviewsSchema.statics.calculateReviews = async function (recipeId: string) {
+  const result = await this.aggregate([
+    { $match: { recipe: recipeId } },
+    {
+      $group: {
+        _id: null,
+        averageRatings: { $avg: "$ratings" },
+        noOfReviews: { $sum: 1 },
+      },
+    },
+  ]);
+  try {
+    await this.model("Recipe").findOneAndUpdate(
+      { _id: recipeId },
+      {
+        averageRatings: Math.ceil(result[0]?.averageRatings || 0),
+        noOfReviews: result[0]?.noOfReviews || 0,
+      }
+    );
+  } catch (error) {}
+};
+// Call method when Review is updated
+ReviewsSchema.post("save", async function () {
+  await this.constructor.calculateReviews(this.recipe);
+});
+// Call method when Review is deleted
+ReviewsSchema.post("remove", async function () {
+  await this.constructor.calculateReviews(this.recipe);
+});
+
+module.exports = mongoose.model("Reviews", ReviewsSchema);

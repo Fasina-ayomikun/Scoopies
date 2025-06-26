@@ -32,7 +32,6 @@ const Navbar = ({
   useEffect(() => {
     if (window) {
       window.addEventListener("scroll", () => {
-        console.log(window.scrollY);
         if (window.scrollY >= 100) {
           console.log(isScrolled);
 
@@ -44,7 +43,6 @@ const Navbar = ({
     }
     () => {
       window.removeEventListener("scroll", () => {
-        console.log(window.scrollY);
         if (window.scrollY >= 100) {
           setIsScrolled(true);
         } else {

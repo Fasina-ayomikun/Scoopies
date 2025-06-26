@@ -1,3 +1,5 @@
+"use client";
+import AddToCart from "@/components/AddToCart";
 import Footer from "@/components/Footer";
 import Sidebar from "@/components/Sidebar";
 import React from "react";
@@ -8,6 +10,7 @@ const layout = ({ children }: { children: React.ReactNode }) => {
       {children}
       <Footer />
       <Sidebar />
+      <AddToCart />
     </section>
   );
 };

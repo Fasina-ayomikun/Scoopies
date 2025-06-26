@@ -43,3 +43,11 @@ export const messageSchema = yup.object({
     .required("Write a message")
     .max(500, "Message should not be more tha 500 characters"),
 });
+export const iceCreamSchema = yup.object({
+  name: yup.string().required("Name is Required"),
+  price: yup.number().required("Price is Required"),
+  desc: yup.string().required("Description is Required"),
+  flavors: yup.array().of(yup.string()),
+  ingredients: yup.array().of(yup.string()),
+  images: yup.array().of(yup.string()),
+});

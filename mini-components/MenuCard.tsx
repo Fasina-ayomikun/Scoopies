@@ -5,8 +5,12 @@ import Ratings from "./Ratings";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useModalProvider } from "@/utils/context/modalContext";
+import {
+  iceCreamFullInterface,
+  iceCreamInterface,
+} from "@/utils/functions/types";
 
-const MenuCard = () => {
+const MenuCard = ({ product }: { product: iceCreamFullInterface }) => {
   const navigator = useRouter();
   const { setOpenAddToCart } = useModalProvider();
 
@@ -14,7 +18,9 @@ const MenuCard = () => {
     <div className='w-full mx-auto shadow-main  p-4 rounded-lg shadow-main-purple/30'>
       <div className='relative w-full h-52 mb-4'>
         <Image
-          src={"/assets/menu.jpg"}
+          src={
+            product.images ? product.images[0].url : "/assets/seo/recipe1.webp"
+          }
           alt='Menu'
           fill
           className='object-cover rounded-md'
@@ -22,23 +28,22 @@ const MenuCard = () => {
       </div>
       <button
         onClick={() => {
-          navigator.push("/menu/787");
+          navigator.push(`/menu/${product._id}`);
         }}
         className='capitalize underline text-sm cursor-pointer'
       >
         View details
       </button>
       <div className='flex items-center justify-between gap-2 my-3 mb-4'>
-        <Ratings ratings={3.5} />
-        <p className='text-xl font-semibold m-0'>&#8358;50</p>
+        <Ratings ratings={product.averageRatings} />
+        <p className='text-xl font-semibold m-0'>&#8358;{product.price}</p>
       </div>
 
       <h4 className='text-xl md:text-2xl capitalize font-semibold '>
-        creamy choco
+        {product.name}
       </h4>
       <p className='text-gray-500 my-2 text-sm'>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatem,
-        repellendus!
+        {product.desc.substring(0, 100)}...
       </p>
 
       <button className='cursor-pointer flex items-center gap-2 capitalize justify-end w-full mt-6'>
