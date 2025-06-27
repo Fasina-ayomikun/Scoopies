@@ -5,7 +5,7 @@ import { contextInterface } from "../functions/types";
 const AuthContext = createContext<contextInterface>(null!);
 
 function AuthProvider({ children }: { children: ReactNode }) {
-  const [user, setUser] = useState({ name: "", email: "" });
+  const [user, setUser] = useState({ name: "", email: "", role: "user" });
 
   return (
     <AuthContext.Provider value={{ user, setUser }}>

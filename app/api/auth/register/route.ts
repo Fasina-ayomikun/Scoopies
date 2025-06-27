@@ -6,7 +6,13 @@ import { NextResponse } from "next/server";
 import { connectToDB } from "@/app/utils/connect";
 
 export const POST = async (req: Request, res: any) => {
-  const { name, loggedInWithPassword, email, password } = await req.json();
+  const {
+    name,
+    loggedInWithPassword,
+    email,
+    password,
+    role = "user",
+  } = await req.json();
   try {
     await connectToDB();
     if (!name || !email || !password) {
@@ -24,7 +30,7 @@ export const POST = async (req: Request, res: any) => {
 
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(password, salt);
-    const token = jwt.sign({ email, name }, "JWT_SECRET", {
+    const token = jwt.sign({ email, name, role }, "JWT_SECRET", {
       expiresIn: "30d",
     });
     const cookie = serialize("scoopies_token", token, {
@@ -41,7 +47,7 @@ export const POST = async (req: Request, res: any) => {
     });
 
     return NextResponse.json(
-      { message: "User successfully created", user: { email, name } },
+      { message: "User successfully created", user: { email, name, role } },
       {
         status: 201,
         headers: {

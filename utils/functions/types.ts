@@ -18,6 +18,7 @@ export interface sendMessageInterface {
 export interface UserInterface {
   name: string;
   email: string;
+  role: string;
 }
 export interface contextInterface {
   user: UserInterface;

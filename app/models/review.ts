@@ -62,13 +62,13 @@ ReviewsSchema.statics.calculateReviews = async function (recipeId: string) {
     );
   } catch (error) {}
 };
-// Call method when Review is updated
-ReviewsSchema.post("save", async function () {
-  await this.constructor.calculateReviews(this.recipe);
-});
-// Call method when Review is deleted
-ReviewsSchema.post("remove", async function () {
-  await this.constructor.calculateReviews(this.recipe);
-});
+// // Call method when Review is updated
+// ReviewsSchema.post("save", async function () {
+//   await this.constructor.calculateReviews(this.recipe);
+// });
+// // Call method when Review is deleted
+// ReviewsSchema.post("remove", async function () {
+//   await this.constructor.calculateReviews(this.recipe);
+// });
 
 module.exports = mongoose.model("Reviews", ReviewsSchema);

@@ -3,13 +3,14 @@ import convertToBase64 from "@/app/utils/convertToBase64";
 import BackBtn from "@/mini-components/BackBtn";
 import Input from "@/mini-components/Input";
 import Tags from "@/mini-components/Tags";
+import { useContextProvider } from "@/utils/context/authContext";
 import { useIceCreamContext } from "@/utils/context/iceCreamContext";
 import { iceCreamSchema } from "@/utils/functions/schema";
 import { iceCreamInterface } from "@/utils/functions/types";
 import { yupResolver } from "@hookform/resolvers/yup";
 import axios from "axios";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import { InferType } from "yup";
@@ -28,6 +29,7 @@ function CreateRecipesPage() {
     formState: { errors },
   } = useForm<iceCreamInterface>();
   const { values, handleTags, setValues } = useIceCreamContext();
+  const { user } = useContextProvider();
   const navigator = useRouter();
   const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     setImagesList([]);
@@ -93,6 +95,12 @@ function CreateRecipesPage() {
       setIsLoading(false);
     }
   };
+  useEffect(() => {
+    if (user.role !== "admin") {
+      toast.warn("Unauthorized to access this route");
+      navigator.push("/");
+    }
+  }, []);
   return (
     <section className='max-w-xl   mx-auto  py-8  l{ useState }g:px-0 md:w-4/5 sm:w-9/12'>
       <BackBtn />

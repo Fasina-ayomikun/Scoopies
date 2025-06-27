@@ -40,6 +40,7 @@ const SignUp = () => {
             email: data.email,
             password: data.password,
             loggedInWithPassword: true,
+            role: "user",
           },
           {
             headers: {
