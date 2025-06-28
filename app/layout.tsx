@@ -5,6 +5,7 @@ import AuthProvider from "@/utils/context/authContext";
 import ModalProvider from "@/utils/context/modalContext";
 import { Slide, ToastContainer } from "react-toastify";
 import IceCreamProvider from "@/utils/context/iceCreamContext";
+import { Suspense } from "react";
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -39,24 +40,26 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${poppins.variable} ${lora.variable} antialiased`}
       >
-        <AuthProvider>
-          <ModalProvider>
-            <ToastContainer
-              position='top-right'
-              autoClose={2000}
-              hideProgressBar={false}
-              newestOnTop={false}
-              closeOnClick
-              rtl={false}
-              pauseOnFocusLoss
-              draggable
-              pauseOnHover
-              theme='colored'
-              transition={Slide}
-            />{" "}
-            <IceCreamProvider>{children}</IceCreamProvider>
-          </ModalProvider>
-        </AuthProvider>
+        <Suspense fallback={<p>Loading...</p>}>
+          <AuthProvider>
+            <ModalProvider>
+              <ToastContainer
+                position='top-right'
+                autoClose={2000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme='colored'
+                transition={Slide}
+              />{" "}
+              <IceCreamProvider>{children}</IceCreamProvider>
+            </ModalProvider>
+          </AuthProvider>
+        </Suspense>
       </body>
     </html>
   );
