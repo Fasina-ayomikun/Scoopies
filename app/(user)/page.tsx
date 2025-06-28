@@ -46,7 +46,6 @@ export default function Home() {
       <BestOfWeek />
       <HomeMenu />
       <HomeTestimonial />
-      <AddToCart />
     </section>
   );
 }

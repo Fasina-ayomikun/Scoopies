@@ -1,3 +1,4 @@
+"use client";
 import Hero from "@/components/Hero";
 import MenuDetails from "@/components/MenuDetails";
 import Filter from "@/mini-components/Filter";

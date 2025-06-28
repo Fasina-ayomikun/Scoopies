@@ -3,7 +3,7 @@ import React from "react";
 import { MdAddCircleOutline } from "react-icons/md";
 import Ratings from "./Ratings";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useModalProvider } from "@/utils/context/modalContext";
 import {
   iceCreamFullInterface,
@@ -12,7 +12,7 @@ import {
 
 const MenuCard = ({ product }: { product: iceCreamFullInterface }) => {
   const navigator = useRouter();
-  const { setOpenAddToCart } = useModalProvider();
+  const pathname = usePathname();
 
   return (
     <div className='w-full mx-auto shadow-main  p-4 rounded-lg shadow-main-purple/30'>
@@ -23,6 +23,7 @@ const MenuCard = ({ product }: { product: iceCreamFullInterface }) => {
           }
           alt='Menu'
           fill
+          sizes='100vw'
           className='object-cover rounded-md'
         />
       </div>
@@ -49,11 +50,15 @@ const MenuCard = ({ product }: { product: iceCreamFullInterface }) => {
       <button className='cursor-pointer flex items-center gap-2 capitalize justify-end w-full mt-6'>
         <MdAddCircleOutline
           className='text-2xl text-pink-900'
-          onClick={() => setOpenAddToCart(true)}
+          onClick={() => {
+            navigator.push(`${pathname}?id=${product._id}&openAddToCart=true`);
+          }}
         />
         <span
           className='underline text-sm'
-          onClick={() => setOpenAddToCart(true)}
+          onClick={() => {
+            navigator.push(`${pathname}?id=${product._id}&openAddToCart=true`);
+          }}
         >
           Add to cart
         </span>

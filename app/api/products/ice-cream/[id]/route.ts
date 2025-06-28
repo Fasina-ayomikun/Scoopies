@@ -1,14 +1,13 @@
 import IceCream from "@/app/models/icecream";
 import { connectToDB } from "@/app/utils/connect";
 import { NextResponse } from "next/server";
+type Params = Promise<{ id: string }>;
 
-export const GET = async (
-  req: Request,
-  { params }: { params: { id: string } }
-) => {
+export const GET = async (req: Request, { params }: { params: Params }) => {
   try {
     await connectToDB();
-    const iceCream = await IceCream.findById(params.id);
+    const { id } = await params;
+    const iceCream = await IceCream.findById(id);
     if (!iceCream) {
       return NextResponse.json(
         { message: "Ice Cream not found" },
@@ -23,14 +22,12 @@ export const GET = async (
     );
   }
 };
-export const PATCH = async (
-  req: Request,
-  { params }: { params: { id: string } }
-) => {
+export const PATCH = async (req: Request, { params }: { params: Params }) => {
   const { name, desc, images, flavors, price, ingredients } = await req.json();
   try {
     await connectToDB();
-    const iceCreamExists = await IceCream.findById(params.id);
+    const { id } = await params;
+    const iceCreamExists = await IceCream.findById(id);
     if (!iceCreamExists) {
       return NextResponse.json(
         { message: "Ice cream not found" },
@@ -57,20 +54,19 @@ export const PATCH = async (
     );
   }
 };
-export const DELETE = async (
-  req: Request,
-  { params }: { params: { id: string } }
-) => {
+export const DELETE = async (req: Request, { params }: { params: Params }) => {
   try {
     await connectToDB();
-    const iceCreamExist = await IceCream.findById(params.id);
+
+    const { id } = await params;
+    const iceCreamExist = await IceCream.findById(id);
     if (!iceCreamExist) {
       return NextResponse.json(
         { message: "ice cream not found" },
         { status: 400 }
       );
     }
-    await IceCream.deleteOne({ _id: params.id });
+    await IceCream.deleteOne({ _id: id });
     return NextResponse.json(
       { message: "ice cream successfully deleted" },
       { status: 200 }

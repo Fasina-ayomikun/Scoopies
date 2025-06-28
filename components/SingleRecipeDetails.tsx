@@ -3,10 +3,13 @@ import { useModalProvider } from "@/utils/context/modalContext";
 import { iceCreamFullInterface } from "@/utils/functions/types";
 import axios from "axios";
 import Image from "next/image";
+import { usePathname, useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
 const SingleRecipeDetails = ({ id }: { id: string }) => {
   const [isLoading, setIsLoading] = useState(false);
+  const navigator = useRouter();
+  const pathname = usePathname();
   const [product, setProduct] = useState<iceCreamFullInterface>({
     name: "",
     desc: "",
@@ -18,7 +21,6 @@ const SingleRecipeDetails = ({ id }: { id: string }) => {
     createdAt: "",
     averageRatings: 0,
   });
-  const { setOpenAddToCart } = useModalProvider();
   const getIceCream = async () => {
     setIsLoading(true);
     try {
@@ -90,7 +92,9 @@ const SingleRecipeDetails = ({ id }: { id: string }) => {
           ))}
         </ul>
         <button
-          onClick={() => setOpenAddToCart(true)}
+          onClick={() => {
+            navigator.push(`${pathname}?id=${product._id}&openAddToCart=true`);
+          }}
           className='md:w-full capitalize flex justify-center btn bg-main-purple w-32 text-white mx-auto my-7'
         >
           order now

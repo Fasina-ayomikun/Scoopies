@@ -1,55 +1,79 @@
-import { useModalProvider } from "@/utils/context/modalContext";
+"use client";
+import { iceCreamFullInterface } from "@/utils/functions/types";
+import axios from "axios";
 import Image from "next/image";
-import React from "react";
+import { useRouter, useSearchParams } from "next/navigation";
+import React, { useEffect, useState } from "react";
 import { FaMinus, FaPlus, FaTimes } from "react-icons/fa";
 
 const AddToCart = () => {
-  const { openAddToCart, setOpenAddToCart } = useModalProvider();
+  const [isLoading, setIsLoading] = useState(false);
+  const [quantity, setQuantity] = useState(1);
+  const getParams = useSearchParams();
+  const id = getParams.get("id");
+  const openAddToCart = getParams.get("openAddToCart");
+  const navigator = useRouter();
+  const [product, setProduct] = useState<iceCreamFullInterface>({
+    name: "",
+    desc: "",
+    ingredients: [""],
+    flavors: [""],
+    price: 0,
+    images: [{ id: "3131", url: "/assets/seo/recipe1.webp" }],
+    _id: "",
+    createdAt: "",
+    averageRatings: 0,
+  });
+  useEffect(() => {
+    const fetchIceCream = async () => {
+      setIsLoading(true);
+      try {
+        const response = await axios.get(`/api/products/ice-cream/${id}`);
+        if (response.status === 200) {
+          setProduct(response.data.iceCream);
+        }
+      } catch (error) {
+        console.error(error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    if (id) {
+      fetchIceCream();
+    }
+  }, [id]);
+
   return (
     <section
-      className={`z-50 fixed top-0 left-0 bottom-0 right-0 w-screen h-screen bg-black/70  items-center justify-center ${
-        openAddToCart ? "flex" : "hidden"
-      }`}
-      onClick={() => setOpenAddToCart(false)}
+      className={`z-50 fixed top-0 left-0 bottom-0 right-0 w-screen h-screen bg-black/70  items-center justify-center flex`}
+      onClick={() => navigator.back()}
     >
       <main
         onClick={(e) => e.stopPropagation()}
         className='bg-white py-7 rounded-md w-4/5 h-fit  max-w-2xl '
       >
         <div className=' flex items-center justify-end w-11/12 mx-auto mb-6'>
-          <FaTimes
-            className='text-lg'
-            onClick={() => setOpenAddToCart(false)}
-          />
+          <FaTimes className='text-lg' />
         </div>
         <div className=' grid grid-cols-3 w-11/12  h-25 mx-auto items-center gap-1 justify-start mb-4 '>
-          <div className='h-full relative'>
-            <Image
-              src={"/assets/seo/recipe1.webp"}
-              alt='recipe'
-              fill
-              className='object-cover rounded-md w-full h-full border-2 border-pink-900'
-            />
-          </div>
-          <div className='h-full relative'>
-            <Image
-              src={"/assets/seo/recipe2.webp"}
-              alt='recipe'
-              fill
-              className='object-cover rounded-md w-full h-full'
-            />
-          </div>
-          <div className='h-full relative'>
-            <Image
-              src={"/assets/seo/recipe2.webp"}
-              alt='recipe'
-              fill
-              className='object-cover rounded-md w-full h-full'
-            />
-          </div>
+          {product.images &&
+            product.images.map((image) => {
+              return (
+                <div className='h-full relative' key={image.id}>
+                  <Image
+                    src={image.url}
+                    alt={image.id}
+                    fill
+                    sizes='100vw'
+                    className='object-cover rounded-md w-full h-full border-2 border-pink-900'
+                  />
+                </div>
+              );
+            })}
         </div>
         <h3 className='font-semibold w-11/12 mx-auto md:text-2xl text-lg mb-2'>
-          Creamy Chocolate
+          {product.name}
         </h3>
         <form action='' className=''>
           <label
@@ -66,7 +90,11 @@ const AddToCart = () => {
             <option value='' className='capitalize px-3 py-3'>
               Choose a flavor
             </option>
-            <option value='chocolate'>chocolate</option>
+            {product.flavors?.map((flavor, index) => (
+              <option value={flavor} key={index}>
+                {flavor}
+              </option>
+            ))}
           </select>
 
           <label
@@ -75,43 +103,44 @@ const AddToCart = () => {
           >
             Ingredients
           </label>
-          <label
-            htmlFor=''
-            className='mb-1 flex w-11/12 mx-auto items-center gap-2 '
-          >
-            <input
-              type='checkbox'
-              name=''
-              id=''
-              className=' accent-green-400 '
-            />{" "}
-            Chocolate
-          </label>
-
-          <label
-            htmlFor=''
-            className='mb-1 flex w-11/12 mx-auto items-center gap-2 '
-          >
-            <input
-              type='checkbox'
-              name=''
-              id=''
-              className=' accent-green-400 '
-            />{" "}
-            Chocolate
-          </label>
+          {product.ingredients?.map((ingredient, index) => (
+            <label
+              htmlFor=''
+              className='mb-1 flex w-11/12 mx-auto items-center gap-2 '
+              key={index}
+            >
+              <input
+                type='checkbox'
+                name={ingredient}
+                id={ingredient}
+                value={ingredient}
+                className=' accent-green-400 '
+              />{" "}
+              {ingredient}
+            </label>
+          ))}
 
           <hr className='w-full border-0 bg-gray-500 h-[1px] my-4' />
           <div className='flex w-11/12 mx-auto items-center justify-between gap-2'>
             <div className=' flex items-center gap-2'>
               <p className='font-medium'>Quantity:</p>
               <div className='flex items-center gap-4'>
-                <FaMinus className='text-pink-900' />
-                <span>2</span>
-                <FaPlus className='text-pink-900' />
+                <FaMinus
+                  className='text-pink-900'
+                  onClick={() =>
+                    setQuantity((prev) => (prev <= 1 ? 1 : prev - 1))
+                  }
+                />
+                <span>{quantity}</span>
+                <FaPlus
+                  className='text-pink-900'
+                  onClick={() => setQuantity((prev) => prev + 1)}
+                />
               </div>
             </div>
-            <p className='font-semibold'>Total: &#8358;50</p>
+            <p className='font-semibold'>
+              Total: &#8358; {product.price * quantity}
+            </p>
           </div>
 
           <hr className='w-full border-0 bg-gray-500 h-[1px] my-4' />

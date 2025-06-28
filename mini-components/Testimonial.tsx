@@ -10,6 +10,7 @@ const Testimonial = () => {
           <Image
             src={"/assets/human1.jpg"}
             fill
+            sizes='100vw'
             alt='human'
             className='object-cover rounded-full'
           />

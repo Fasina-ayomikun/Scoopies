@@ -1,12 +1,14 @@
+"use client";
 import Navbar from "@/components/Navbar";
 import BackBtn from "@/mini-components/BackBtn";
 import Filter from "@/mini-components/Filter";
 import Image from "next/image";
-import React from "react";
+import React, { useState } from "react";
 import { FaChevronLeft } from "react-icons/fa";
 import { MdCheck } from "react-icons/md";
 
 const OrdersPage = () => {
+  const [filter, setFilter] = useState("");
   return (
     <section>
       <Navbar />
@@ -18,7 +20,7 @@ const OrdersPage = () => {
         Track your orders here
       </p>
 
-      <Filter filters={["active", "completed"]} />
+      <Filter filters={["active", "completed"]} setFilter={setFilter} />
 
       <section className='grid grid-cols-1  md:grid-cols-2 max-w-6xl gap-5 w-11/12 mx-auto my-10'>
         <div className='w-full '>

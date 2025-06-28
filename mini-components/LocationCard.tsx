@@ -19,6 +19,7 @@ const LocationCard = () => {
           src={"/assets/menu.jpg"}
           alt='Menu'
           fill
+          sizes='100vw'
           className='object-cover rounded-md'
         />
       </div>
