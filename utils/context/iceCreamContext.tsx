@@ -14,7 +14,7 @@ const initialState = {
   price: 0,
   flavors: [],
   ingredients: [],
-  images: [{ public_id: "", url: "" }],
+  images: [{ id: "", url: "" }],
 };
 
 function IceCreamProvider({ children }: { children: React.ReactNode }) {
