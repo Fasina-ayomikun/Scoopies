@@ -81,7 +81,9 @@ function CreateRecipesPage() {
       console.log(response);
       if (response.status === 201) {
         toast.success(response.data.message);
-        navigator.refresh();
+        if (window) {
+          window.location.reload();
+        }
       }
     } catch (error) {
       console.log("====================================");
