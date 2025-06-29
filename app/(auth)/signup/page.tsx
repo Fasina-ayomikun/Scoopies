@@ -54,7 +54,11 @@ const SignUp = () => {
           if (window) {
             window.localStorage.setItem(
               "SCOOPIES_CURRENT_USER",
-              JSON.stringify({ name: user.name, email: user.email })
+              JSON.stringify({
+                name: user.name,
+                email: user.email,
+                role: user.role,
+              })
             );
           }
           setUser(user as UserInterface);
