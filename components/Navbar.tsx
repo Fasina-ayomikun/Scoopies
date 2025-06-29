@@ -28,7 +28,12 @@ const Navbar = ({
   const pathname = usePathname();
   const navigate = useRouter();
   const { user } = useContextProvider();
-
+  const logOut = () => {
+    if (window) {
+      window.localStorage.removeItem("SCOOPIES_CURRENT_USER");
+      navigate.push("/signin");
+    }
+  };
   useEffect(() => {
     if (window) {
       window.addEventListener("scroll", () => {
@@ -132,7 +137,7 @@ const Navbar = ({
                   </p>
                   <button
                     onClick={() => {
-                      navigate.push("/signin");
+                      logOut();
                     }}
                     className={`rounded-full  w-2 justify-center gap-2 btn capitalize ${
                       isScrolled || white

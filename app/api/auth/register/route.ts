@@ -57,5 +57,9 @@ export const POST = async (req: Request, res: any) => {
     );
   } catch (error) {
     console.log(error);
+    return NextResponse.json(
+      { message: "Registration failed" },
+      { status: 500 }
+    );
   }
 };

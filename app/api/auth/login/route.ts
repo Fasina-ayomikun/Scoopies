@@ -52,5 +52,7 @@ export const POST = async (req: Request, res: any) => {
     });
   } catch (error) {
     console.log(error);
+    console.log(error);
+    return NextResponse.json({ message: "Log in failed" }, { status: 500 });
   }
 };
