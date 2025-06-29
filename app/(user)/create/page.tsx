@@ -96,7 +96,9 @@ function CreateRecipesPage() {
     }
   };
   useEffect(() => {
-    if (user.role !== "admin") {
+    console.log(user);
+
+    if (user.role.toLowerCase().trim() !== "admin") {
       toast.warn("Unauthorized to access this route");
       navigator.push("/");
     }
