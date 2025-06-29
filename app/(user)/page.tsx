@@ -24,6 +24,7 @@ import {
   MdOutlineStarOutline,
   MdStar,
 } from "react-icons/md";
+import User from "../models/user";
 
 export default function Home() {
   const { setUser } = useContextProvider();
@@ -33,6 +34,8 @@ export default function Home() {
     );
     user = user ? JSON.parse(user) : null;
     if (user) {
+      console.log(user, "OOOOOO");
+
       setUser(user as UserInterface);
     }
   }, []);

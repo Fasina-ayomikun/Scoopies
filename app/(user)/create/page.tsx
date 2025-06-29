@@ -6,7 +6,7 @@ import Tags from "@/mini-components/Tags";
 import { useContextProvider } from "@/utils/context/authContext";
 import { useIceCreamContext } from "@/utils/context/iceCreamContext";
 import { iceCreamSchema } from "@/utils/functions/schema";
-import { iceCreamInterface } from "@/utils/functions/types";
+import { iceCreamInterface, UserInterface } from "@/utils/functions/types";
 import { yupResolver } from "@hookform/resolvers/yup";
 import axios from "axios";
 import { useRouter } from "next/navigation";
@@ -29,7 +29,6 @@ function CreateRecipesPage() {
     formState: { errors },
   } = useForm<iceCreamInterface>();
   const { values, handleTags, setValues } = useIceCreamContext();
-  const { user } = useContextProvider();
   const navigator = useRouter();
   const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     setImagesList([]);
@@ -96,13 +95,16 @@ function CreateRecipesPage() {
     }
   };
   useEffect(() => {
-    console.log(user);
-
-    if (user.role.toLowerCase().trim() !== "admin") {
+    let user: string | UserInterface | null = window.localStorage.getItem(
+      "SCOOPIES_CURRENT_USER"
+    );
+    user = user ? JSON.parse(user) : null;
+    if ((user as UserInterface)?.role.toLowerCase().trim() !== "admin") {
       toast.warn("Unauthorized to access this route");
       navigator.push("/");
     }
   }, []);
+
   return (
     <section className='max-w-xl   mx-auto  py-8  l{ useState }g:px-0 md:w-4/5 sm:w-9/12'>
       <BackBtn />
