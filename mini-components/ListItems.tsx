@@ -1,3 +1,5 @@
+import { useIceCreamContext } from "@/utils/context/iceCreamContext";
+import { TagField } from "@/utils/functions/types";
 import React from "react";
 import { MdClose } from "react-icons/md";
 
@@ -8,8 +10,9 @@ function ListItems({
 }: {
   index: number;
   item: string;
-  type: string;
+  type: TagField;
 }) {
+  const { deleteTags } = useIceCreamContext();
   return (
     <li
       key={index}
@@ -19,7 +22,7 @@ function ListItems({
       <MdClose
         className='text-main-purple text-sm'
         onClick={() => {
-          //   dispatch(deleteTags({ type, index }));
+          deleteTags({ type, index });
         }}
       />{" "}
     </li>

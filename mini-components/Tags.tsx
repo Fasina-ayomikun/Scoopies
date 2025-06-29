@@ -1,7 +1,14 @@
 import React from "react";
 import ListItems from "./ListItems";
+import { TagField } from "@/utils/functions/types";
 
-function Tags({ items, type }: { items: string[] | undefined; type: string }) {
+function Tags({
+  items,
+  type,
+}: {
+  items: string[] | undefined;
+  type: TagField;
+}) {
   return (
     <ul className='flex flex-wrap items-center gap-2'>
       {items &&
